@@ -1,0 +1,8 @@
+<% layout("./base") %>
+<body>
+    <%~ include("./nav", { patient: true }) %>
+    <section>
+        <p>Patients are cool</p>
+    </section>
+    <%~ include("./debug", it) %>
+</body>

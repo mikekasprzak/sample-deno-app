@@ -1,0 +1,13 @@
+body {
+    background: white;
+}
+
+nav {
+    & a {
+        background: #ddd;
+        text-decoration: none;
+    }
+    & .tab {
+        padding: 0.25em 1em;
+    }
+}

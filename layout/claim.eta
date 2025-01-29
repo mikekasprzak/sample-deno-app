@@ -1,0 +1,7 @@
+<% layout("./base") %>
+<body>
+    <%~ include("./nav", { claim: true }) %>
+    <section>
+        <p>Claims are money</p>
+    </section>
+</body>

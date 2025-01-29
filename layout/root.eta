@@ -1,0 +1,5 @@
+<% layout("./base") %>
+<body>
+    <%~ include("./nav", { root: true }) %>
+    <script>window.location.replace("/patient");</script>
+</body>

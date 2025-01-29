@@ -1,0 +1,25 @@
+<nav>
+    <% if (it.patient) { %>
+        <span class="tab">Patient</span></a>
+    <% } else { %>
+        <a class="tab" href="/patient">Patient</a>
+    <% } %>
+
+    <% if (it.prescription) { %>
+        <span class="tab">Prescription</span></a>
+    <% } else { %>
+        <a class="tab" href="/prescription">Prescription</a>
+    <% } %>
+
+    <% if (it.claim) { %>
+        <span class="tab">Claim</span></a>
+    <% } else { %>
+        <a class="tab" href="/claim">Claim</a>
+    <% } %>
+
+    <% if (it.insurance) { %>
+        <span class="tab">Insurance</span></a>
+    <% } else { %>
+        <a class="tab" href="/insurance">Insurance</a>
+    <% } %>
+</nav>

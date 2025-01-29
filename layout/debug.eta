@@ -1,0 +1,4 @@
+<% /* To use this, add the following to your template: <%~ include("./debug", it) %> */ %>
+<section class="debug">
+    <pre><%= JSON.stringify(it, null, 2) %></pre>
+</section>
