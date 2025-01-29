@@ -1,4 +1,4 @@
-import { Application, Router } from "jsr:@oak/oak@^17.1.3"; // Router: handles URL requests
+import { Application, Router } from "jsr:@oak/oak@^17.1.3"; // Oak Router: handles URL requests
 import { Eta } from "jsr:@eta-dev/eta@^3.5.0";              // Eta: HTML template engine (i.e. <%= data %>, <% javascript code %>) 
 
 const router = new Router();
