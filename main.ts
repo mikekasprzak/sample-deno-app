@@ -20,10 +20,10 @@ function AddSimpleRoute(routePath: string, etaTemplateFile: string, func?: (ctx?
 }
 
 // Instead of writing the code above multiple times
-AddSimpleRoute("/", "./layout/redirect", () => {
+AddSimpleRoute("/", "./template/redirect", () => {
   return { url: "/patient/25" };
 });
-AddSimpleRoute("/patient/:id*", "./layout/patient", (ctx) => {
+AddSimpleRoute("/patient/:id*", "./template/patient", (ctx) => {
   // TODO: fetch this data from somewhere
   return {
     id: parseInt(ctx?.params?.id || "0"),
@@ -53,9 +53,9 @@ AddSimpleRoute("/patient/:id*", "./layout/patient", (ctx) => {
     }
   };
 });
-AddSimpleRoute("/prescription/:id*", "./layout/prescription");
-AddSimpleRoute("/claim/:id*", "./layout/claim");
-AddSimpleRoute("/insurance/:id*", "./layout/insurance");
+AddSimpleRoute("/prescription/:id*", "./template/prescription");
+AddSimpleRoute("/claim/:id*", "./template/claim");
+AddSimpleRoute("/insurance/:id*", "./template/insurance");
 
 // serve static files found under `/static/...`
 router.get("/static/:path+", async (ctx) => {
