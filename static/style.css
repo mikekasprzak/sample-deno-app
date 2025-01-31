@@ -2,21 +2,72 @@ body {
     background: white;
 }
 
+
+/* Navigation */
 nav {
-    & a {
+    padding-bottom: 0.5em;
+
+    .-tab {
+        padding: 0.25em 1em;
+    }
+
+    /* tabs with an 'a' tag are inactive */ 
+    a.-tab {
         background: #ddd;
         text-decoration: none;
     }
-    & .tab {
-        padding: 0.25em 1em;
+    /* tab without an 'a' tag are active */
+    :not(a).-tab {
+        font-weight: bold;
     }
 }
 
+
+section {
+    margin: 0.5em 0;
+
+    h2,
+    h3 {
+        font-size: 1em;
+    }
+
+    h2 {
+        margin-top: 2em;
+    }
+
+    h3 {
+        display: inline-block;
+        margin: 0;
+    }
+
+    /* Remove left padding for the first child of a section */
+    :not(.-pad):first-child {
+        padding-left: 0;
+    }
+}
+
+
+div {
+    display: inline-block;
+    vertical-align: top;
+
+    &.-align-left {
+        text-align: left;
+    }
+    &.-align-right {
+        text-align: right;
+    }
+}
+
+
+
 label {
     padding-right: 0.5em;
+    line-height: 1.5em;
+    padding-left: 1em;
 
-    /* Any labels marked as required */
-    &.required:before {
+    /* Any labels marked as -required */
+    &.-required:before {
         content: "*";
         color: red;
     }

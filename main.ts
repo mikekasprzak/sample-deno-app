@@ -5,27 +5,41 @@ const router = new Router();
 const eta = new Eta({ views: import.meta.dirname });
 const port = 8080;
 
-function AddRoute(routePath: string, etaTemplateFile: string) {
+function AddRoute(routePath: string, etaTemplateFile: string, func?: (ctx?: object) => object) {
   // Handle GET requests
   router.get(routePath, (ctx) => {
-    const data = {
-      title: "Potato",
-      name: {
-        first: "Joe",
-        last: "Shmoe"
-      },
-      legal: {
-        first: "Joseph",
-        last: "Shmoe"
-      }
-    };
+    const data =  func ? func(ctx) : {};
     ctx.response.body = eta.render(etaTemplateFile, {...ctx, data});
   });
 }
 
 // Instead of writing the code above multiple times
 AddRoute("/", "./layout/root"); // NOTE: The page is setup to do a JS redirect
-AddRoute("/patient/:id*", "./layout/patient");
+AddRoute("/patient/:id*", "./layout/patient", () => {
+  return {
+    name: {
+      first: "Joe",
+      middle: "",
+      last: "Schmoe",
+      maiden: "Dirt",
+    },
+    legal: {
+      first: "Joseph",
+      middle: "Montgomery",
+      last: "Schmoe"
+    },
+    title: "Mx",
+    gender: "x",
+    age: 24,
+    address: {
+      street: "15 Cool Rd",
+      unit: "",
+      city: "Sarnia",
+      province: "Ontario",
+      code: "M1B 2CJ",
+    }
+  };
+});
 AddRoute("/prescription/:id*", "./layout/prescription");
 AddRoute("/claim/:id*", "./layout/claim");
 AddRoute("/insurance/:id*", "./layout/insurance");
