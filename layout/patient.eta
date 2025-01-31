@@ -2,7 +2,19 @@
 <body>
     <%~ include("./nav", { patient: true }) %>
     <section>
-        <p>Patients are cool</p>
+        <span>Title</span><input type="text" value="<%= it.title ? it.title : '' %>"/>
+        <section class="name">
+            <h3>Common Name</h3>
+            <span>*Last</span><input type="text" value="<%= it.name ? it.name.last : '' %>"/>
+            <span>*First</span><input type="text" value="<%= it.name ? it.name.first : '' %>"/>
+            <span>Middle</span><input type="text" value="<%= it.name ? it.name.middle : '' %>"/>
+        </section>
+        <section class="legal">
+            <h3>Legal Name</h3>
+            <span>*Last</span><input type="text" value="<%= it.legal ? it.legal.last : '' %>"/>
+            <span>*First</span><input type="text" value="<%= it.legal ? it.legal.first : '' %>"/>
+            <span>Middle</span><input type="text" value="<%= it.legal ? it.legal.middle : '' %>"/>
+        </section>
+        <span>*Gender</span><input type="text" value="<%= it.gender ? it.gender : 'None' %>"/>
     </section>
-    <%~ include("./debug", it) %>
 </body>
