@@ -1,34 +1,44 @@
-import { Application, Router } from "jsr:@oak/oak@^17.1.3"; // Oak Router: handles URL requests
+import { Application, Router, RouterContext } from "jsr:@oak/oak@^17.1.3"; // Oak Router: handles URL requests
 import { Eta } from "jsr:@eta-dev/eta@^3.5.0";              // Eta: HTML template engine (i.e. <%= data %>, <% javascript code %>) 
 
 const router = new Router();
 const eta = new Eta({ views: import.meta.dirname });
 const port = 8080;
 
-function AddRoute(routePath: string, etaTemplateFile: string, func?: (ctx?: object) => object) {
+/**
+ * Add a standard GET request router for the specified path 
+ * @param routePath - the URL to route requests for
+ * @param etaTemplateFile - an `.eta` template file used to render the page
+ * @param func - a function that returns an object containing data you want to make available to the template 
+ */
+function AddSimpleRoute(routePath: string, etaTemplateFile: string, func?: (ctx?: RouterContext<string>) => object) {
   // Handle GET requests
   router.get(routePath, (ctx) => {
-    const data =  func ? func(ctx) : {};
+    const data = func ? typeof func === 'function' ? func(ctx) : func : {};
     ctx.response.body = eta.render(etaTemplateFile, {...ctx, data});
   });
 }
 
 // Instead of writing the code above multiple times
-AddRoute("/", "./layout/root"); // NOTE: The page is setup to do a JS redirect
-AddRoute("/patient/:id*", "./layout/patient", () => {
+AddSimpleRoute("/", "./layout/redirect", () => {
+  return { url: "/patient/25" };
+});
+AddSimpleRoute("/patient/:id*", "./layout/patient", (ctx) => {
+  // TODO: fetch this data from somewhere
   return {
+    id: parseInt(ctx?.params?.id || "0"),
     name: {
       first: "Joe",
       middle: "",
       last: "Schmoe",
+      title: "Mx",
       maiden: "Dirt",
     },
     legal: {
       first: "Joseph",
       middle: "Montgomery",
-      last: "Schmoe"
+      last: "Schmoe",
     },
-    title: "Mx",
     gender: "x",
     age: 24,
     address: {
@@ -37,14 +47,17 @@ AddRoute("/patient/:id*", "./layout/patient", () => {
       city: "Sarnia",
       province: "Ontario",
       code: "M1B 2CJ",
+    },
+    contact: {
+      email: "joe@shmoe.ca",
     }
   };
 });
-AddRoute("/prescription/:id*", "./layout/prescription");
-AddRoute("/claim/:id*", "./layout/claim");
-AddRoute("/insurance/:id*", "./layout/insurance");
+AddSimpleRoute("/prescription/:id*", "./layout/prescription");
+AddSimpleRoute("/claim/:id*", "./layout/claim");
+AddSimpleRoute("/insurance/:id*", "./layout/insurance");
 
-// serve static files
+// serve static files found under `/static/...`
 router.get("/static/:path+", async (ctx) => {
   await ctx.send({
     "root": Deno.cwd()  // root is the "current working directory" that Deno was executed in

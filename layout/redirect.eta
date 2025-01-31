@@ -1,0 +1,4 @@
+<% layout("./base") %>
+<body>
+    <script>window.location.replace("<%= it.data.url %>");</script>
+</body>

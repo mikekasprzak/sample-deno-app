@@ -1,38 +1,21 @@
 <% layout("./base") %>
+<% const data = it.data; /* so we can do 'data.name' instead of 'it.data.name' */ %>
 <body>
-    <%~ include("./nav", { patient: true }) %>
-    <% const data = it.data; /* so we can do 'data.name' instead of 'it.data.name' */ %>
+    <%~ include("./nav", { patient: true, id: data?.id }) %>
     <article class="patient">
-        <section>
-            <div class="-align-right">
-                <section class="common-name">
-                    <h3>Common Name</h3>
-                    <label for="name.last" class="-required">Last</label><input name="name.last" type="text" value="<%= data?.name?.last || '' %>"/>
-                    <label for="name.first" class="-required">First</label><input name="name.first" type="text" value="<%= data?.name?.first || '' %>"/>
-                    <label for="name.middle">Middle</label><input name="name.middle" type="text" value="<%= data?.name?.middle || '' %>"/>
-                </section>
-                <section class="legal-name">
-                    <h3>Legal Name</h3>
-                    <label for="legal.last" class="-required">Last</label><input name="legal.last" type="text" value="<%= data?.legal?.last || '' %>"/>
-                    <label for="legal.first" class="-required">First</label><input name="legal.first" type="text" value="<%= data?.legal?.first || '' %>"/>
-                    <label for="legal.middle">Middle</label><input name="legal.middle" type="text" value="<%= data?.legal?.middle || '' %>"/>
-                </section>
-            </div>
-            <div>
-                <section>
-                    <label for="title" accesskey="t" class="-pad">Title</label><select name="title" autocomplete="off">
-                        <option <%= (data?.title) ? '' : 'selected' %>></option>
-                        <option <%= (data?.title == 'Mr') ? 'selected' : '' %>>Mr</option>
-                        <option <%= (data?.title == 'Ms') ? 'selected' : '' %>>Ms</option>
-                        <option <%= (data?.title == 'Mrs') ? 'selected' : '' %>>Mrs</option>
-                        <option <%= (data?.title == 'Mx') ? 'selected' : '' %>>Mx</option>
-                        <option <%= (data?.title == 'Potato') ? 'selected' : '' %>>Potato</option>
-                    </select>
-                </section>
-                <section>
-                    <label for="name.maiden" class="-pad">Maiden</label><input name="name.maiden" type="text" value="<%= data?.name?.maiden || '' %>"/>
-                </section>
-            </div>
+        <section class="-align-right">
+            <section class="common-name">
+                <h3>Common Name</h3>
+                <label for="name.last" class="-required">Last</label><input name="name.last" type="text" value="<%= data?.name?.last || '' %>"/>
+                <label for="name.first" class="-required">First</label><input name="name.first" type="text" value="<%= data?.name?.first || '' %>"/>
+                <label for="name.middle">Middle</label><input name="name.middle" type="text" size="30" value="<%= data?.name?.middle || '' %>"/>
+            </section>
+            <section class="legal-name">
+                <h3>Legal Name</h3>
+                <label for="legal.last" class="-required">Last</label><input name="legal.last" type="text" value="<%= data?.legal?.last || '' %>"/>
+                <label for="legal.first" class="-required">First</label><input name="legal.first" type="text" value="<%= data?.legal?.first || '' %>"/>
+                <label for="legal.middle">Middle</label><input name="legal.middle" type="text" size="30" value="<%= data?.legal?.middle || '' %>"/>
+            </section>
         </section>
         <section>
             <label for="gender" class="-required">Gender</label><select name="gender" autocomplete="off">
@@ -43,10 +26,19 @@
             </select>
             <label for="dob">Date of birth</label><input name="dob" type="text" size="10" disabled value="<%= new Date(new Date().setFullYear(new Date().getFullYear() - parseInt(data?.age))).toLocaleDateString() %>"/>
             <label for="age">Age</label><input name="age" type="text" maxlength="3" size="3" disabled value="<%= data?.age || '' %>"/>
+            <label for="title" accesskey="t" class="-pad">Title</label><select name="title" autocomplete="off">
+                <option <%= (data?.name?.title) ? '' : 'selected' %>></option>
+                <option <%= (data?.name?.title == 'Mr') ? 'selected' : '' %>>Mr</option>
+                <option <%= (data?.name?.title == 'Ms') ? 'selected' : '' %>>Ms</option>
+                <option <%= (data?.name?.title == 'Mrs') ? 'selected' : '' %>>Mrs</option>
+                <option <%= (data?.name?.title == 'Mx') ? 'selected' : '' %>>Mx</option>
+                <option <%= (data?.name?.title == 'Potato') ? 'selected' : '' %>>Potato</option>
+            </select>
+            <label for="name.maiden" class="-pad">Maiden Name</label><input name="name.maiden" type="text" value="<%= data?.name?.maiden || '' %>"/>
         </section>
         <section>
             <h2>Primary address</h2>
-            <div class="-align-right">
+            <section class="-align-right">
                 <section>
                     <label for="address.street" class="-required">Street</label>
                 </section>
@@ -56,8 +48,8 @@
                 <section>
                     <label for="address.country">Country</label>
                 </section>
-            </div>
-            <div>
+            </section>
+            <section class="-align-left">
                 <section>
                     <input name="address.street" type="text" size="90" value="<%= data?.address?.street || '' %>"/>
                     <input name="address.unit" type="text" value="<%= data?.address?.unit || '' %>"/>
@@ -68,10 +60,21 @@
                     <label for="address.code">Postal Code</label><input name="address.code" type="text" size="10" value="<%= data?.address?.code || '' %>"/>
                 </section>
                 <section>
-                    <input name="address.country" type="text" size="25" value="<%= data?.address?.country || 'Canada' %>"/>
+                    <input name="address.country" type="text" size="25" <%= data?.address?.country ? '' : 'disabled' %>  value="<%= data?.address?.country || 'Canada' %>"/>
                     <label for="address.note">Notes</label><input name="address.note" type="text" size="70" value="<%= data?.address?.node || '' %>"/>
                 </section>
-            </div>
+            </section>
+        </section>
+        <section>
+            <h3>Phone and Contact</h3>
+            <label for="contact.mobile">Mobile</label><input name="contact.mobile" type="text" value="<%= data?.contact?.mobile || '' %>"/>
+            <label for="contact.home">Home</label><input name="contact.home" type="text" value="<%= data?.contact?.home || '' %>"/>
+            <label for="contact.alt">Alt</label><input name="contact.alt" type="text" value="<%= data?.contact?.alt || '' %>"/>
+        </section>
+        <section>
+            <label for="contact.email">Email</label><input name="contact.email" type="text" size="50" value="<%= data?.contact?.email || '' %>"/>
+            <label for="contact.other">Other</label><input name="contact.other" type="text" size="50" value="<%= data?.contact?.other || '' %>"/>
         </section>
     </article>
+    <%/*<%~ include("./debug", it) %>*/%>
 </body>

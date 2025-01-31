@@ -7,17 +7,17 @@ body {
 nav {
     padding-bottom: 0.5em;
 
-    .-tab {
+    .tab {
         padding: 0.25em 1em;
     }
 
-    /* tabs with an 'a' tag are inactive */ 
-    a.-tab {
+    /* tabs with an 'a' tag are visually inactive */ 
+    a.tab {
         background: #ddd;
         text-decoration: none;
     }
-    /* tab without an 'a' tag are active */
-    :not(a).-tab {
+    /* tabs without an 'a' tag are visually active */
+    :not(a).tab {
         font-weight: bold;
     }
 }
@@ -25,40 +25,36 @@ nav {
 
 section {
     margin: 0.5em 0;
-
-    h2,
-    h3 {
-        font-size: 1em;
-    }
+    vertical-align: top;
 
     h2 {
+        font-size: 1.25em;
         margin-top: 2em;
     }
 
     h3 {
+        font-size: 1em;
         display: inline-block;
         margin: 0;
     }
 
-    /* Remove left padding for the first child of a section */
+    /* Remove left padding for the first child of a section (if it doesn't have a -pad class) */
     :not(.-pad):first-child {
         padding-left: 0;
     }
-}
 
-
-div {
-    display: inline-block;
-    vertical-align: top;
-
+    /* */
     &.-align-left {
+        display: inline-block;
         text-align: left;
+        margin: 0;
     }
     &.-align-right {
+        display: inline-block;
         text-align: right;
+        margin: 0;
     }
 }
-
 
 
 label {
