@@ -8,7 +8,18 @@ const port = 8080;
 function AddRoute(routePath: string, etaTemplateFile: string) {
   // Handle GET requests
   router.get(routePath, (ctx) => {
-    ctx.response.body = eta.render(etaTemplateFile, ctx);
+    const data = {
+      title: "Potato",
+      name: {
+        first: "Joe",
+        last: "Shmoe"
+      },
+      legal: {
+        first: "Joseph",
+        last: "Shmoe"
+      }
+    };
+    ctx.response.body = eta.render(etaTemplateFile, {...ctx, data});
   });
 }
 

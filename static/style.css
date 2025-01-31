@@ -11,3 +11,13 @@ nav {
         padding: 0.25em 1em;
     }
 }
+
+label {
+    padding-right: 0.5em;
+
+    /* Any labels marked as required */
+    &.required:before {
+        content: "*";
+        color: red;
+    }
+}

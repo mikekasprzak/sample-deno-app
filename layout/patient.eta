@@ -1,20 +1,28 @@
 <% layout("./base") %>
 <body>
     <%~ include("./nav", { patient: true }) %>
+    <% const data = it.data; /* so we can omit the 'it.' prefix */ %>
     <section>
-        <span>Title</span><input type="text" value="<%= it.title ? it.title : '' %>"/>
+        <label for="title">Title:</label><select name="title">
+            <option <%= (data?.title) ? '' : 'selected' %>></option>
+            <option <%= (data?.title == 'Mr') ? 'selected' : '' %>>Mr</option>
+            <option <%= (data?.title == 'Ms') ? 'selected' : '' %>>Ms</option>
+            <option <%= (data?.title == 'Mrs') ? 'selected' : '' %>>Mrs</option>
+            <option <%= (data?.title == 'Mx') ? 'selected' : '' %>>Mx</option>
+            <option <%= (data?.title == 'Potato') ? 'selected' : '' %>>Potato</option>
+        </select>
         <section class="name">
             <h3>Common Name</h3>
-            <span>*Last</span><input type="text" value="<%= it.name ? it.name.last : '' %>"/>
-            <span>*First</span><input type="text" value="<%= it.name ? it.name.first : '' %>"/>
-            <span>Middle</span><input type="text" value="<%= it.name ? it.name.middle : '' %>"/>
+            <label class="required">Last:</label><input type="text" value="<%= data?.name?.last || '' %>"/>
+            <label class="required">First:</label><input type="text" value="<%= data?.name?.first || '' %>"/>
+            <label>Middle:</label><input type="text" value="<%= data?.name?.middle || '' %>"/>
         </section>
         <section class="legal">
             <h3>Legal Name</h3>
-            <span>*Last</span><input type="text" value="<%= it.legal ? it.legal.last : '' %>"/>
-            <span>*First</span><input type="text" value="<%= it.legal ? it.legal.first : '' %>"/>
-            <span>Middle</span><input type="text" value="<%= it.legal ? it.legal.middle : '' %>"/>
+            <label class="required">Last:</label><input type="text" value="<%= data?.legal?.last || '' %>"/>
+            <label class="required">First:</label><input type="text" value="<%= data?.legal?.first || '' %>"/>
+            <label>Middle:</label><input type="text" value="<%= data?.legal?.middle || '' %>"/>
         </section>
-        <span>*Gender</span><input type="text" value="<%= it.gender ? it.gender : 'None' %>"/>
+        <label class="required">Gender</label><input type="text" value="<%= data?.gender || 'none' %>"/>
     </section>
 </body>
