@@ -24,7 +24,7 @@
                 <option value="m" <%= (data?.gender == 'm') ? 'selected' : '' %>>Male</option>
                 <option value="x" <%= (data?.gender == 'x') ? 'selected' : '' %>>Other</option>
             </select>
-            <label for="dob">Date of birth</label><input name="dob" type="text" size="10" disabled value="<%= new Date(new Date().setFullYear(new Date().getFullYear() - parseInt(data?.age))).toLocaleDateString() %>"/>
+            <label for="dob">Date of Birth</label><input name="dob" type="text" size="10" disabled value="<%= new Date(new Date().setFullYear(new Date().getFullYear() - parseInt(data?.age))).toLocaleDateString() %>"/>
             <label for="age">Age</label><input name="age" type="text" maxlength="3" size="3" disabled value="<%= data?.age || '' %>"/>
             <label for="title" accesskey="t" class="-pad">Title</label><select name="title" autocomplete="off">
                 <option <%= (data?.name?.title) ? '' : 'selected' %>></option>
@@ -37,7 +37,7 @@
             <label for="name.maiden" class="-pad">Maiden Name</label><input name="name.maiden" type="text" value="<%= data?.name?.maiden || '' %>"/>
         </section>
         <section>
-            <h2>Primary address</h2>
+            <h2>Primary Address and Contact Information</h2>
             <section class="-align-right">
                 <section>
                     <label for="address.street" class="-required">Street</label>
@@ -57,23 +57,23 @@
                 <section>
                     <input name="address.city" type="text" size="45" value="<%= data?.address?.city || '' %>"/>
                     <label for="address.province" class="-required">Province</label><input name="address.province" type="text" size="20" value="<%= data?.address?.province || '' %>"/>
-                    <label for="address.code">Postal Code</label><input name="address.code" type="text" size="10" value="<%= data?.address?.code || '' %>"/>
+                    <label for="address.code">Postal Code</label><input name="address.code" type="text" size="10" class="-monospace" value="<%= data?.address?.code || '' %>"/>
                 </section>
                 <section>
                     <input name="address.country" type="text" size="25" <%= data?.address?.country ? '' : 'disabled' %> value="<%= data?.address?.country || 'Canada' %>"/>
-                    <label for="address.note">Notes</label><input name="address.note" type="text" size="70" value="<%= data?.address?.node || '' %>"/>
+                    <label for="address.note">Address Note</label><input name="address.note" type="text" size="65" value="<%= data?.address?.note || '' %>"/>
                 </section>
             </section>
         </section>
         <section>
-            <h3>Phone and Contact</h3>
-            <label for="contact.mobile">Mobile</label><input name="contact.mobile" type="text" value="<%= data?.contact?.mobile || '' %>"/>
-            <label for="contact.home">Home</label><input name="contact.home" type="text" value="<%= data?.contact?.home || '' %>"/>
-            <label for="contact.alt">Alt</label><input name="contact.alt" type="text" value="<%= data?.contact?.alt || '' %>"/>
+            <h3>Phone</h3>
+            <label for="contact.mobile">Mobile</label><input name="contact.mobile" type="text" class="-monospace" value="<%= data?.contact?.mobile || '' %>"/>
+            <label for="contact.home">Home</label><input name="contact.home" type="text" class="-monospace" value="<%= data?.contact?.home || '' %>"/>
+            <label for="contact.alt">Other Phone</label><input name="contact.alt" type="text" class="-monospace" value="<%= data?.contact?.alt || '' %>"/>
         </section>
         <section>
-            <label for="contact.email">Email</label><input name="contact.email" type="text" size="50" value="<%= data?.contact?.email || '' %>"/>
-            <label for="contact.other">Other</label><input name="contact.other" type="text" size="50" value="<%= data?.contact?.other || '' %>"/>
+            <label for="contact.email">Email</label><input name="contact.email" type="text" size="40" value="<%= data?.contact?.email || '' %>"/>
+            <label for="contact.other">Other Contact</label><input name="contact.other" type="text" size="55" value="<%= data?.contact?.other || '' %>"/>
         </section>
     </article>
     <%/*<%~ include("./debug", it) %>*/%>

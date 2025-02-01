@@ -1,7 +1,7 @@
 <% layout("./base") %>
 <body>
     <%~ include("./nav", { insurance: true }) %>
-    <section>
-        <p>Insurance pays the bills</p>
-    </section>
+    <article>
+        <p>Insurance pays the bills ...................................................</p>
+    </article>
  </body>

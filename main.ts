@@ -57,6 +57,7 @@ AddSimpleRoute("/patient/:id", "./template/patient", (ctx) => {
       code: "M1B 2CJ",
     },
     contact: {
+      mobile: "(519)123-4567",
       email: "joe@shmoe.ca",
     }
   };

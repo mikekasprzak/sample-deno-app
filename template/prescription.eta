@@ -1,7 +1,7 @@
 <% layout("./base") %>
 <body>
     <%~ include("./nav", { prescription: true }) %>
-    <section>
-        <p>Prescriptions are drugs</p>
-    </section>
+    <article>
+        <p>Prescriptions are drugs............................................................</p>
+    </article>
 </body>
