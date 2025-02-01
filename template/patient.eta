@@ -60,7 +60,7 @@
                     <label for="address.code">Postal Code</label><input name="address.code" type="text" size="10" value="<%= data?.address?.code || '' %>"/>
                 </section>
                 <section>
-                    <input name="address.country" type="text" size="25" <%= data?.address?.country ? '' : 'disabled' %>  value="<%= data?.address?.country || 'Canada' %>"/>
+                    <input name="address.country" type="text" size="25" <%= data?.address?.country ? '' : 'disabled' %> value="<%= data?.address?.country || 'Canada' %>"/>
                     <label for="address.note">Notes</label><input name="address.note" type="text" size="70" value="<%= data?.address?.node || '' %>"/>
                 </section>
             </section>
