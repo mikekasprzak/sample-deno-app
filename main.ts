@@ -1,9 +1,9 @@
 import { Application, Router, RouterContext } from "jsr:@oak/oak@^17.1.3"; // Oak Router: handles URL requests
-import { Eta } from "jsr:@eta-dev/eta@^3.5.0";              // Eta: HTML template engine (i.e. <%= data %>, <% javascript code %>) 
+import { Eta } from "jsr:@eta-dev/eta@^3.5.0"; // Eta: HTML template engine (i.e. <%= value %>, <% javascript code %>) 
 
 const router = new Router();
 const eta = new Eta({ views: import.meta.dirname });
-const port = 8080;
+const serverPort = 8080;
 
 /**
  * Add a standard GET request router for the specified path 
@@ -19,14 +19,22 @@ function AddSimpleRoute(routePath: string, etaTemplateFile: string, func?: (ctx?
   });
 }
 
-// Instead of writing the code above multiple times
+// if root, redirect to /patient
 AddSimpleRoute("/", "./template/redirect", () => {
+  return { url: "/patient" };
+});
+// if patient, redirect to a specific patient
+AddSimpleRoute("/patient", "./template/redirect", () => {
   return { url: "/patient/25" };
 });
-AddSimpleRoute("/patient/:id*", "./template/patient", (ctx) => {
-  // TODO: fetch this data from somewhere
+AddSimpleRoute("/patient/:id", "./template/patient", (ctx) => {
+  const id = parseInt(ctx?.params?.id || "0");
+
+  // TODO: fetch data belonging to id and return it
+
+  // HACK: placeholder data
   return {
-    id: parseInt(ctx?.params?.id || "0"),
+    id: id,
     name: {
       first: "Joe",
       middle: "",
@@ -44,7 +52,7 @@ AddSimpleRoute("/patient/:id*", "./template/patient", (ctx) => {
     address: {
       street: "15 Cool Rd",
       unit: "",
-      city: "Sarnia",
+      city: "Toronto",
       province: "Ontario",
       code: "M1B 2CJ",
     },
@@ -60,7 +68,7 @@ AddSimpleRoute("/insurance/:id*", "./template/insurance");
 // serve static files found under `/static/...`
 router.get("/static/:path+", async (ctx) => {
   await ctx.send({
-    "root": Deno.cwd()  // root is the "current working directory" that Deno was executed in
+    root: Deno.cwd()  // root is the "current working directory" that Deno was executed in
   });
 });
 
@@ -69,5 +77,5 @@ const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log(`Server listening on http://localhost:${port}`);
-app.listen({ port: port });
+console.log(`Server listening on http://localhost:${serverPort}`);
+app.listen({ port: serverPort });
