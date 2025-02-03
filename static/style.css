@@ -1,14 +1,17 @@
+/* <body> */
 body {
     background: #ccc;
     font-family: sans-serif;
     margin: 0;
 
+    /* <body><a> */
     a {
         color: #444;
     }
 }
 
 
+/* <article> */
 article {
     background: #eee;
     padding: 0.5em 1em 2em;
@@ -21,15 +24,18 @@ article {
 
 
 /* Navigation */
+/* <nav> */
 nav {
     padding: 0.5em 0.25em 0.25em;
 
+    /* <nav><?? class="tab"> */
     .tab {
         padding: 0.25em 1em;
         text-transform: uppercase;
     }
 
     /* tabs with an 'a' tag are visually inactive */ 
+    /* <nav><a class="tab"> */
     a.tab {
         background: #bbb;
         text-decoration: none;
@@ -41,6 +47,7 @@ nav {
         }
     }
     /* tabs without an 'a' tag are visually active */
+    /* <nav><?? class="tab">, but never <a> tags */
     :not(a).tab {
         background: #eee;
         font-weight: bold;
@@ -51,17 +58,19 @@ nav {
     margin: 1em 1em 0;  /* gap along top and edge */
 }
 
-
+/* <section> */
 section {
     margin: 0.5em 0;
     vertical-align: top;
 
+    /* <section><h2> */
     h2 {
         font-size: 1.25em;
         margin-top: 1.5em;
         margin-bottom: 0.25em;
     }
 
+    /* <section><h3> */
     h3 {
         font-size: 1em;
         display: inline-block;
@@ -69,16 +78,19 @@ section {
     }
 
     /* Remove left padding for the first child of a section (if it doesn't have a -pad class) */
+    /* <section><??>, but only the first-child tag of <section>, but only if it's not an <input> tag or it uses <?? class="-pad"> */
     :not(input):not(.-pad):first-child {
+        /* no left padding */
         padding-left: 0;
     }
 
-    /* */
+    /* <section class="-align-left"> */
     &.-align-left {
         display: inline-block;
         text-align: left;
         margin: 0;
     }
+    /* <section class="-align-right"> */
     &.-align-right {
         display: inline-block;
         text-align: right;
@@ -86,23 +98,26 @@ section {
     }
 }
 
-
+/* <label> */
 label {
     padding-right: 0.5em;
     line-height: 1.5em;
     padding-left: 1em;
 
     /* Any labels marked as -required */
+    /* <label class="-required"> */
     &.-required:before {
         content: "*";
         color: red;
     }
 }
 
+/* <input type="text"> */
 input[type="text"] {
     border-radius: 0.25em;
     padding: 0.125em 0.5em;
 
+    /* <input type="text" class="-monospace"> */
     &.-monospace {
         font-family: monospace;
     }
