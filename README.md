@@ -19,10 +19,10 @@ While this isn't being written or maintained as a tutorial, you may find these f
 * [deno.json](/deno.json) - The Deno configuration file. I wanted to show how little you actually need, so this file is bare.
 
 ## How do I run this?
-Install deno, checkout the code, browse to the directory, and run the following:
+Install deno, checkout the code, open a terminal and browse to the directory, and run the following:
 
 ```bash
 deno task run
 ```
 
-The first time Deno should download a few packages, then start the server. Open <http://localhost:8080> in your web browser to view the application.
+The first time Deno should download a few packages, then start the server. Open <http://localhost:8080> in your web browser to view the application. Push `CTRL+C` in the terminal to stop the server.
