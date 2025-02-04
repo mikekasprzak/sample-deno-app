@@ -1,3 +1,48 @@
+/** 
+ * CSS is a way to specify styles in an HTML document. In CSS we write selectors (i.e. `selector {}`) to choose what 
+ * we want to style, then list the styles inside a `{}` block.
+ * 
+ * Selectors contain one or more elements. An element is either an HTML tag (`mytag` in CSS, `<mytag>` in HTML),
+ * a class (`.myclass` in CSS, `<?? class="myclass">` in HTML), an id (`#myid` in CSS, `<?? id="myid">`), an
+ * attribute (`[key=value]` in CSS, `<?? key="value">` in HTML), or a pseudo-selector (`:pseudo` in CSS only).
+ * `*` can be used as a wildcard for any HTML tag.
+ * 
+ * A selector can include multiple elements.
+ 
+ * Elements separated by whitespace describe "descendant selectors". For example `body p {}` specifies any paragraph 
+ * tag (i.e. `<p>`) under body (`<body>`). The `body p {}` selector would match the `<p>` tag under both `<body><p>`
+ * and `<body><div><p>`. To select only the child (i.e. the direct descendant), you'd write a selector like 
+ * `body > p {}`. See MDN or another reference for more types of relationship selectors.
+ *
+ * Elements without whitespace describe "same selectors". For example `button.cool {}` would select
+ * `<button class="cool">`. You can chain together multiple elements, but only a single HTML tag can be used per
+ * group. i.e. `body p.dark a.light.disabled {}` will match `<body><p class="dark"><a class="light disabled">`.
+ *
+ * Pseudo-selectors can describe things that don't exist (yet). For example `p:before` selects a pseudo element
+ * before `<p>`. By itself this isn't very useful, but content style can be used to insert text
+ * (i.e. `content: "*";`).
+ *
+ * Pseudo-selectors can be used to describe events. For example `button:hover {}` is an event that is triggered
+ * while the mouse cursor is hovering over an HTML tag.
+ *
+ * Finally, some pseudo-selectors can be used as functions or logical operations. The `:not()` pseudo selector
+ * is one of the most useful, letting you select the opposite of the selector found inside. For example
+ * `body :not(p)` will select any HTML tags in the body that aren't `<p>`. i.e. `<body><p>no</p><em>yes</em></body>`.
+ * Again, see MDN for a complete list of pseudo-selectors.
+ *
+ * In CSS, the MOST SPECIFIC selector wins. Given a selector for `p {}` and `body p {}`, the 2nd selector is more
+ * specific, so if you used the same style in both (i.e. `color: red;` vs `color: blue;`), `body p {}`'s color wins.
+ *
+ * Modern CSS lets us write nested selectors (i.e. `body { a {} }`), which is a shorthand for writing selectors
+ * (i.e. `body a { }`). The `&` can be used in the place of the parent (i.e. `a { &.green {} }` is the same as
+ * `a.green {}`.
+ *
+ * For completeness, CSS also supports something called media queries. `@media` queries let you define selectors
+ * and styles that should only show up on desktop web browsers, mobile web browsers, or while printing. This makes
+ * HTML and CSS useful for both static hard-copies (printed media, books) and dynamic media with a variety of screen
+ * sizes and shapes.
+*/
+
 /* <body> */
 body {
     background: #ccc;
@@ -40,6 +85,7 @@ nav {
         background: #bbb;
         text-decoration: none;
 
+        /* <nav><a class="tab">, but only when the mouse is hovering over the <a> element, or the <a> element is selected (pushing tab) */
         &:hover,
         &:focus {
             background: red;
