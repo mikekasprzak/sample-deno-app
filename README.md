@@ -13,10 +13,10 @@ It uses:
 ## Where do I start?
 While this isn't being written or maintained as a tutorial, you may find these files helpful.
 
-* <main.ts> - The source code... yes, that's essentially it (though some snippets can be found in the templates)
-* <template/patient.eta> - The most-complete page template. Written to be easy to read and follow, though it does include a examples of how you might align things or make them optional.
-* <static/style.css> - CSS styles, paired with the templates. Includes a brief CSS crash-course at the top.
-* <deno.js> - The Deno configuration file. I wanted to show how little you actually need, so this file is bare.
+* </main.ts> - The source code... yes, that's essentially it (though some snippets can be found in the templates)
+* </template/patient.eta> - The most-complete page template. Written to be easy to read and follow, though it does include a examples of how you might align things or make them optional.
+* </static/style.css> - CSS styles, paired with the templates. Includes a brief CSS crash-course at the top.
+* </deno.js> - The Deno configuration file. I wanted to show how little you actually need, so this file is bare.
 
 ## How do I run this?
 Install deno, checkout the code, browse to the directory, and run the following:
